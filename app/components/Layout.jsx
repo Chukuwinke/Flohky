@@ -18,6 +18,8 @@ export function Layout({cart, children = null, footer, header, isLoggedIn}) {
       <CartAside cart={cart} />
       <SearchAside />
       <MobileMenuAside menu={header?.menu} shop={header?.shop} />
+      {/** here is where the page starts */}
+      {/**console.log(children)*/}
       {header && <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />}
       <main>{children}</main>
       <Suspense>

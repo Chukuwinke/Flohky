@@ -16,7 +16,8 @@ export const meta = () => {
 export async function loader({context}) {
   const {storefront} = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
-  const featuredCollection = collections.nodes[0];
+  //const featuredCollection = collections.nodes[0];
+  const featuredCollection = collections;
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
 
   return defer({featuredCollection, recommendedProducts});
@@ -25,9 +26,13 @@ export async function loader({context}) {
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
+  //console.log(data, "here")
   return (
     <div className="home">
-      <FeaturedCollection collection={data.featuredCollection} />
+      {data.featuredCollection.nodes.map((collection, index) => (
+        <FeaturedCollection key={index} collection={collection} />
+      ))}
+      {/**<FeaturedCollection collection={data.featuredCollection} />*/}
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
   );
@@ -38,7 +43,14 @@ export default function Homepage() {
  *   collection: FeaturedCollectionFragment;
  * }}
  */
+//Begin 
+
+// function FeaturedCollectionCarousel({}){
+
+// }
+//End
 function FeaturedCollection({collection}) {
+  console.log(collection)
   if (!collection) return null;
   const image = collection?.image;
   return (
@@ -95,6 +107,11 @@ function RecommendedProducts({products}) {
   );
 }
 
+// Begin Graphql Fetch
+/**const FEATURED_COLLECTIONS_QUERY =`#graphql
+  fragment FeaturedCollection
+`*/
+//// End Graphql Fetch
 const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {
     id
