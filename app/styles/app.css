@@ -135,10 +135,11 @@ aside li {
   padding: 0 1rem;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 5;
 }
 
 .header-menu-mobile-toggle {
+  z-index: 1000000000;
   @media (min-width: 48em) {
     display: none;
   }
@@ -148,6 +149,7 @@ aside li {
   display: flex;
   flex-direction: column;
   grid-gap: 1rem;
+  z-index: 1000000000;
 }
 
 .header-menu-desktop {
@@ -472,6 +474,7 @@ aside li {
     margin-top: -50px;
     overflow: hidden;
     position: relative;
+    z-index: 0;
 }
 .carousel .list .item{
     width: 100%;
@@ -483,6 +486,7 @@ aside li {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease-in-out, opacity 1.5s ease-in-out;
 }
 .carousel .list .item .content{
     position: absolute;
@@ -636,18 +640,28 @@ aside li {
     bottom: 50px;
     left: 50%;
     border-radius: 30px;
-    animation: showImage .3s linear 1 forwards;
-    filter:blur(20px)
+    /* animation: showImage .3s linear 1 forwards; */
+    animation: fadeIn 1.5s ease-in-out forwards;
+    /* filter:blur(20px) */
+    opacity: 0;
 }
-@keyframes showImage{
+/* @keyframes showImage{
     to{
         bottom: 0;
         left: 0;
         width: 100%;
         height: 100%;
         border-radius: 0;
-        filter: blur(0px);
+        filter: blur(20px);
     }
+} */
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
 }
 
 .carousel.next .thumbnail .item:nth-last-child(1){

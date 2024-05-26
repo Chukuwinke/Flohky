@@ -67,12 +67,12 @@ function FeaturedCollections({ collections }) {
       runTimeOut = setTimeout(() => {
         carouselDom.classList.remove('next');
         carouselDom.classList.remove('prev');
-      }, 3000);
+      }, 300);
 
       clearTimeout(runNextAuto);
       runNextAuto = setTimeout(() => {
         nextDom.click();
-      }, 7000);
+      }, 5000);
     };
 
     nextDom.onclick = () => showSlider('next');
